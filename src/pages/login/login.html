@@ -1,0 +1,43 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>用户登录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div style="text-align:center">
+    <img style="width:100px;height:100px;border-radius:50%"
+    src="assets/img/default.jpg" alt="">
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed><ion-icon name="contact" color="lightb" style="font-size:20px;"></ion-icon>用户名</ion-label>
+      <ion-input [(ngModel)]="userName" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed><ion-icon name="key" color="lightb" style="font-size:20px;"></ion-icon>密码</ion-label>
+      <ion-input [(ngModel)]="userPwd" type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <span>注册</span>
+      </ion-col>
+      <ion-col push-3>
+        <span>忘记密码</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <button (click)="doLogin()" ion-button block color="lightb">登录</button>
+
+</ion-content>

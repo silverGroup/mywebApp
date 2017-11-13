@@ -1,0 +1,137 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>用户设置</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color:#1C1028">
+<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content color="light" pullingText="下拉刷新" refreshing="正在刷新" refreshSpinner='bubbles'>
+      <!--circles/dots/bubbles-->
+    </ion-refresher-content>
+</ion-refresher>  
+<div *ngIf="isUserLogin">
+  <div style="text-align:center">
+    <img style="width:100px;height:100px;border-radius:50%" src="assets/img/default.jpg" alt="">
+  </div>
+  <ion-list>
+    <ion-item-group>
+    <ion-item-divider color="lightb">用户基本信息:</ion-item-divider>
+    <ion-item>
+      <ion-label fixed>
+        <ion-icon name="person"></ion-icon>用户名:
+      </ion-label>
+      <ion-input type="text" [value]="userList.uname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+       <ion-icon name="mail"></ion-icon>邮箱:
+      </ion-label>
+      <ion-input type="text" [value]="userList.email"></ion-input>
+    </ion-item>
+     <ion-item>
+      <ion-label fixed>
+       <ion-icon name="key"></ion-icon>密码:
+      </ion-label>
+      <ion-input type="{{eyeshow?'text':'password'}}" [value]="userList.upwd">
+      </ion-input>
+      <ion-toggle checked="true" [(ngModel)]="eyeshow" color="lightb"></ion-toggle>
+    </ion-item>
+     <ion-item>
+      <ion-label fixed>
+       <ion-icon name="call"></ion-icon>手机号:
+      </ion-label>
+      <ion-input type="text" [value]="userList.phone"></ion-input>
+    </ion-item>
+  </ion-item-group>
+  </ion-list>
+  <ion-list radio-group>
+    <ion-item-group>
+      <ion-item-divider color="lightb">收货地址:</ion-item-divider>
+      <ion-item-sliding *ngFor="let tmp of addressList;let myIndex=index">
+        <ion-item>
+          <ion-label>
+            <ion-icon name="pin">
+            </ion-icon>{{tmp.receiver}}{{tmp.cellphone}}{{tmp.province}}{{tmp.country}}</ion-label>
+          <ion-radio item-start value="bg" [checked]="tmp.is_default==1"></ion-radio>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="danger" (click)="deleteAddress(tmp.aid)"><ion-icon name="trash"></ion-icon>删除</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+  <div>
+  <ion-segment [(ngModel)]="selaction" color="light">
+    <ion-segment-button value="add">
+      添加
+    </ion-segment-button>
+    <ion-segment-button value="update">
+     修改
+    </ion-segment-button>
+  </ion-segment>
+</div>
+<div [ngSwitch]="selaction" color="lightb">
+  <ion-list *ngSwitchCase="'add'">
+    <ion-item>
+       <ion-label fixed>
+        <ion-icon name="person"></ion-icon>姓名:
+      </ion-label>
+      <ion-input type="text" value="" [(ngModel)]="newname"></ion-input>
+    </ion-item>
+    <ion-item>
+       <ion-label fixed>
+        <ion-icon name="call"></ion-icon>手机号:
+      </ion-label>
+      <ion-input type="text" value="" [(ngModel)]="newphone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>地址</ion-label>
+      <ion-select [(ngModel)]="pronvice"  (ngModelChange)="getRrgionList()" okText="确定" cancelText="取消">
+        <ion-option *ngFor="let tmp of loadcity['province'];" [value]="tmp.code">{{tmp.name}}</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="city"  (ngModelChange)="getCityList()"  okText="确定" cancelText="取消">
+        <ion-option *ngFor="let tmp of cityList;" [value]="tmp.code">{{tmp.name}}</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="area" okText="确定" cancelText="取消">
+        <ion-option value="h" *ngFor="let tmp of areaList;" [value]="tmp.code" >{{tmp.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>
+      详细地址:
+      </ion-label>
+      <ion-input type="text" value="" [(ngModel)]="newaddress"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label style="font-size:18px;">设为默认</ion-label>
+        <ion-checkbox [(ngModel)]="ischeck" color="lightb"></ion-checkbox>
+    </ion-item>
+     <button ion-button color="lightb" block (click)="gosubmit()">提交</button>
+  </ion-list>
+  <ion-list *ngSwitchCase="'update'">
+    <button ion-item *ngFor="let tmp of addressList;let myIndex=index" (click)="updateAddress(tmp.aid)">
+      <ion-icon name="pin" item-start></ion-icon>
+      {{tmp.receiver}}{{tmp.cellphone}}{{tmp.province}}{{tmp.country}}
+    </button>
+  </ion-list>
+</div>
+</div>
+<div *ngIf="!isUserLogin"> 
+    <div style="text-align:center;color:aliceblue">
+      <img style="width:90px;height:90px;border-radius:50%"
+      src="assets/img/default.jpg" alt="">
+      <p>还未登录无法查看个人设置哟~</p>
+    </div>
+    <button ion-button block color="lightb" (click)="goLogin()">点击登录</button>
+</div>
+</ion-content>

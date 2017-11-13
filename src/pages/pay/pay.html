@@ -1,0 +1,46 @@
+<!--
+  Generated template for the PayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>支付页面</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div style="height:250px;width:100%;background:rgba(0,0,0,0.4)">
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col style="text-align:left">
+        <button ion-button clear (click)="closePage()">
+          <ion-icon name="close-circle" color="lightb" style="font-size:20px;"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col style="text-align:center">
+          <h4>确定付款</h4>
+      </ion-col>
+      <ion-col  style="text-align:right">
+        <button ion-button clear (click)="closePage()">
+          <ion-icon name="help-circle" color="lightb" style="font-size:20px;"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="text-align:center">
+        ￥{{totalprice}}
+      </ion-col>
+    </ion-row>
+    <ion-row style="height:50px;">
+      <ion-col style="text-align:left;font-weight:bold">支付账号:</ion-col>
+      <ion-col style="text-align:right">1245121@qq.com</ion-col>
+    </ion-row>
+     <ion-row style="height:50px;">
+      <ion-col style="text-align:left;font-weight:bold">支付方式:</ion-col>
+      <ion-col style="text-align:right">花呗</ion-col>
+    </ion-row>
+  </ion-grid>
+  <button ion-button block color="lightb" (click)="showLoading()">确定支付</button>
+</ion-content>

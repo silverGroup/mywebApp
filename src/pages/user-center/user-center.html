@@ -1,0 +1,57 @@
+<!--
+  Generated template for the UserCenterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>用户中心</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-color:#1C1028">
+<div *ngIf="!isUserLogin"> 
+ <div style="text-align:center">
+      <img style="width:90px;height:90px;border-radius:50%"
+      src="assets/img/default.jpg" alt="">
+   </div>
+    <button ion-button block color="lightb" (click)="goLogin()">还未登录?点击登录</button>
+    <button ion-button block color="lightb" (click)="goregister()">还没账号?点击注册</button>
+</div>
+<div *ngIf="isUserLogin"> 
+  <div style="text-align:center;color:aliceblue;margin-top:0;">
+      <img style="width:90px;height:90px;border-radius:50%"
+      src="assets/img/default.jpg" alt="">
+      <div style="font-size:20px;">{{userList.uname}}</div>
+      <ion-icon name="call" style="font-size:16px;">{{userList.phone}}</ion-icon>
+    </div>
+    <ion-card>
+  <ion-card-header>
+    <ion-icon name="logo-tux" style="font-size:26px;"></ion-icon>
+    用户购物信息
+  </ion-card-header>
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="cart" item-start></ion-icon>
+      已购买商品
+    </button>
+    <button ion-item>
+      <ion-icon name="heart" item-start></ion-icon>
+      我的收藏
+    </button>
+    <button ion-item>
+      <ion-icon name="trophy" item-start></ion-icon>
+      我的收货
+    </button>
+    <button ion-item>
+      <ion-icon name="thumbs-up" item-start></ion-icon>
+     给的好评
+    </button>
+  </ion-list>
+  </ion-card>
+  <div>
+    <button ion-button block color="lightb" (click)="exitLogin()">退出登录</button>
+  </div>
+</div>
+</ion-content>
